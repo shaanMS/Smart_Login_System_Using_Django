@@ -1,9 +1,19 @@
-Email Verification System built with Django.
-Features secure email-based signup, token verification, password setup, personal details onboarding, login/logout, resend verification, rate limiting, and session handling. Designed with real-world edge cases like expired sessions and inactive users in mind. Clean, scalable, and production-ready auth flow.
+# Email Verification Project Screenshots
 
+### Login Page
+![Login Secure Access](screenshots/LoginSecureAccess.png)
 
-<p float="left">
-  <img src="screenshots/Login.png" width="200" />
-  <img src="screenshots/Dashboard.png" width="200" />
-  <img src="screenshots/EmailSent.png" width="200" />
-</p>
+### Dashboard
+![Dashboard User Portal](screenshots/DashboardUserPortal.png)
+
+### Email Sent Confirmation
+![Email Sent Check Your Inbox](screenshots/EmailSentCheckYourInbox.png)
+
+### Resend Verification
+![Resend Verification Account Access](screenshots/ResendVerificationAccountAccess.png)
+
+### Mail Preview
+![Mail](screenshots/Mail.png)
+
+### Access Denied Page
+![Access Denied](screenshots/AccessDenied.png)
