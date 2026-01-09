@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Create Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --success: #06d6a0;
+            --warning: #ffd166;
+            --danger: #ef476f;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --border: #e0e0e0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .signup-container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .signup-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .signup-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-30px) translateX(-30px); }
+        }
+        
+        .signup-icon {
+            position: relative;
+            z-index: 1;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .signup-header h2 {
+            position: relative;
+            z-index: 1;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .signup-header p {
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        .signup-form {
+            padding: 40px 35px;
+        }
+        
+        .benefits-list {
+            background: #f0f7ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .benefits-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .benefits-list ul {
+            list-style: none;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+        
+        .benefits-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 18px 14px 45px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #fcfcfc;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .btn-send {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn-send:hover {
+            background: linear-gradient(to right, var(--primary-dark), #6310a1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .form-footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--dark);
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .btn-send.loading .loading-spinner {
+            display: inline-block;
+        }
+        
+        @media (max-width: 480px) {
+            .signup-container {
+                max-width: 100%;
+            }
+            
+            .signup-form {
+                padding: 30px 25px;
+            }
+            
+            .signup-header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-header">
+            <div class="signup-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <h2>Sign Up - Enter your email</h2>
+            <p>We'll send you a verification link to get started</p>
+        </div>
+        
+        <form method="post" class="signup-form" id="signupForm">
+            {% csrf_token %}
+            
+            <div class="benefits-list">
+                <div class="benefits-title">
+                    <i class="fas fa-star"></i> Benefits of joining
+                </div>
+                <ul>
+                    <li>Secure account with 2FA support</li>
+                    <li>Access to all premium features</li>
+                    <li>24/7 customer support</li>
+                    <li>Regular updates and improvements</li>
+                </ul>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}" class="form-label">
+                    Email Address
+                </label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope input-icon"></i>
+                    {{ form.email }}
+                </div>
+                {% if form.email.help_text %}
+                <p class="form-hint" style="font-size: 0.85rem; color: #666; margin-top: 5px;">
+                    {{ form.email.help_text }}
+                </p>
+                {% endif %}
+                {% if form.email.errors %}
+                <div style="color: var(--danger); font-size: 0.85rem; margin-top: 5px;">
+                    {{ form.email.errors|join:", " }}
+                </div>
+                {% endif %}
+            </div>
+            
+            <button type="submit" class="btn-send" id="submitBtn">
+                <span class="btn-text">Send Verification Email</span>
+                <div class="loading-spinner"></div>
+            </button>
+        </form>
+        
+        <div class="form-footer">
+            <p>Already have an account? <a href="/login/">Sign in here</a></p>
+            <p style="margin-top: 8px; font-size: 0.85rem;">By signing up, you agree to our Terms and Privacy Policy</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('signupForm');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        form.addEventListener('submit', function() {
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            submitBtn.querySelector('.btn-text').textContent = 'Sending...';
+        });
+        
+        // Add focus styling to email input
+        const emailInput = document.querySelector('input[name="email"]');
+        if (emailInput) {
+            emailInput.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            emailInput.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        }
+    </script>
+</body>
+</html>

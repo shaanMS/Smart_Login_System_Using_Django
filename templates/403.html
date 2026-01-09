@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 - Access Denied</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .error-container {
+            max-width: 850px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .error-header {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .error-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .error-header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .error-content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .error-message {
+            background-color: #f9f9f9;
+            border-left: 5px solid #ff4b2b;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .error-message h3 {
+            color: #ff4b2b;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .error-message p {
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .reason-box {
+            background-color: #fff8f6;
+            border: 1px solid #ffddd6;
+            border-radius: 10px;
+            padding: 25px;
+        }
+        
+        .reason-box h3 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .reason-box ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .reason-box li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+            padding-left: 10px;
+        }
+        
+        .solution-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 10px;
+        }
+        
+        .solution-card {
+            background: #f0f8ff;
+            border-radius: 10px;
+            padding: 25px;
+            border-top: 4px solid #4a6ee0;
+            transition: transform 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .solution-card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .solution-card ul {
+            padding-left: 20px;
+        }
+        
+        .solution-card li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #4a6ee0, #6a11cb);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, #3a5ed0, #5a01bb);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f1f3f4;
+            color: #5f6368;
+        }
+        
+        .btn-secondary:hover {
+            background: #e8eaed;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .error-footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .error-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .error-content {
+                padding: 25px;
+            }
+            
+            .solution-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        .token-rotation-note {
+            background-color: #fffde7;
+            border: 1px solid #ffecb3;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #5d4037;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-header">
+            <h1>
+                <i class="fas fa-shield-alt"></i> 403 - Access Denied
+            </h1>
+            <h2>Something Went Wrong!</h2>
+        </div>
+        
+        <div class="error-content">
+            <div class="error-message">
+                <h3>Security Check Failed</h3>
+                <p>The request could not be processed because a security token validation failed. This is typically caused by a missing or incorrect Cross-Site Request Forgery (CSRF) token.</p>
+            </div>
+            
+            <div class="reason-box">
+                <h3><i class="fas fa-exclamation-triangle"></i> Primary Cause</h3>
+                <p>The CSRF token in your request was missing or incorrect. This could happen because:</p>
+                <ul>
+                    <li>Your browser's cookies are disabled or blocked</li>
+                    <li>The page was cached or reloaded without the proper token</li>
+                    <li>You logged in or out in another browser tab</li>
+                    <li>The form submission didn't include the required security token</li>
+                </ul>
+                
+                <div class="token-rotation-note">
+                    <strong>Note:</strong> CSRF tokens are rotated after login for security reasons. If you've recently logged in, please reload the form page to get a new token.
+                </div>
+            </div>
+            
+            <div class="solution-section">
+                <div class="solution-card">
+                    <h4><i class="fas fa-user-check"></i> If You're a User</h4>
+                    <ul>
+                        <li>Ensure cookies are enabled in your browser</li>
+                        <li>Refresh the page and try the action again</li>
+                        <li>Clear your browser cache and cookies, then retry</li>
+                        <li>Log out and log back in if the problem persists</li>
+                    </ul>
+                </div>
+                
+                <div class="solution-card">
+                    <h4><i class="fas fa-code"></i> If You're a Developer</h4>
+                    <ul>
+                        <li>Ensure <code>{% csrf_token %}</code> is inside your POST form</li>
+                        <li>Verify <code>CsrfViewMiddleware</code> is enabled in settings</li>
+                        <li>Check that the view passes request to template render method</li>
+                        <li>For AJAX requests, include the CSRF token in headers</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button class="btn btn-primary" id="reloadBtn">
+                    <i class="fas fa-redo"></i> Reload Page
+                </button>
+                <a href="/" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Return to Homepage
+                </a>
+                <button class="btn btn-secondary" id="helpBtn">
+                    <i class="fas fa-question-circle"></i> Get Help
+                </button>
+            </div>
+        </div>
+        
+        <div class="error-footer">
+            <p>This is a security feature to protect against Cross-Site Request Forgery attacks.</p>
+            <p>If you believe this is an error, please contact support with details of what you were trying to do.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('reloadBtn').addEventListener('click', function() {
+            location.reload();
+        });
+        
+        document.getElementById('helpBtn').addEventListener('click', function() {
+            alert("For assistance, please contact your system administrator or the support team with details about what you were trying to do when this error occurred.");
+        });
+        
+        // Add a note about cookies if they might be disabled
+        if (!navigator.cookieEnabled) {
+            const reasonBox = document.querySelector('.reason-box ul');
+            const cookieWarning = document.createElement('li');
+            cookieWarning.innerHTML = '<strong>Cookies appear to be disabled in your browser. This will prevent CSRF tokens from working correctly.</strong>';
+            reasonBox.appendChild(cookieWarning);
+        }
+    </script>
+</body>
+</html>

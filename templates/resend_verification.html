@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resend Verification | Account Access</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --success: #06d6a0;
+            --warning: #ffd166;
+            --danger: #ef476f;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --border: #e0e0e0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .resend-container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .resend-header {
+            background: linear-gradient(to right, #ff9a00, #ff6b6b);
+            color: white;
+            padding: 35px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .resend-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .resend-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .resend-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        .resend-form {
+            padding: 40px 35px;
+        }
+        
+        .message-box {
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .message-box.success {
+            background: rgba(6, 214, 160, 0.1);
+            border-left: 4px solid var(--success);
+            color: #0a5c48;
+        }
+        
+        .message-box.error {
+            background: rgba(239, 71, 111, 0.1);
+            border-left: 4px solid var(--danger);
+            color: #c53030;
+        }
+        
+        .message-box i {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 18px 14px 45px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: #fcfcfc;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #ff9a00;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 154, 0, 0.15);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ff9a00;
+            font-size: 1.1rem;
+        }
+        
+        .btn-resend {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, #ff9a00, #ff6b6b);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn-resend:hover {
+            background: linear-gradient(to right, #e68900, #e05555);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 154, 0, 0.3);
+        }
+        
+        .btn-resend:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .btn-resend.loading .loading-spinner {
+            display: inline-block;
+        }
+        
+        .cooldown-notice {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff9e6;
+            border-radius: 8px;
+            border: 1px solid #ffecb3;
+            color: #5d4037;
+            font-size: 0.9rem;
+        }
+        
+        .cooldown-timer {
+            font-weight: 600;
+            color: #e65100;
+        }
+        
+        .resend-footer {
+            margin-top: 30px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .resend-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .resend-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 480px) {
+            .resend-container {
+                max-width: 100%;
+            }
+            
+            .resend-form {
+                padding: 30px 25px;
+            }
+            
+            .resend-header {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resend-container">
+        <div class="resend-header">
+            <div class="resend-icon">
+                <i class="fas fa-redo"></i>
+            </div>
+            <h2>Resend Verification Email</h2>
+            <p>Enter your email address to receive a new verification link</p>
+        </div>
+        
+        <form method="post" class="resend-form" id="resendForm">
+            {% csrf_token %}
+            
+            {% if message %}
+            <div class="message-box {% if 'success' in message or 'sent' in message %}success{% else %}error{% endif %}">
+                <i class="fas fa-{% if 'success' in message or 'sent' in message %}check-circle{% else %}exclamation-circle{% endif %}"></i>
+                <p>{{ message }}</p>
+            </div>
+            {% endif %}
+            
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input type="email" name="email" placeholder="Enter your email" class="form-control" required>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-resend" id="submitBtn">
+                <span class="btn-text">Resend Verification Link</span>
+                <div class="loading-spinner"></div>
+            </button>
+            
+            <div class="cooldown-notice" id="cooldownNotice" style="display: none;">
+                <i class="fas fa-clock"></i>
+                Please wait <span class="cooldown-timer">60</span> seconds before requesting another email.
+            </div>
+        </form>
+        
+        <div class="resend-footer">
+            <a href="/login/">
+                <i class="fas fa-arrow-left"></i> Back to Login
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('resendForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const cooldownNotice = document.getElementById('cooldownNotice');
+        const cooldownTimer = document.querySelector('.cooldown-timer');
+        
+        // Check if there's a cooldown in localStorage
+        const lastSentTime = localStorage.getItem('lastVerificationSent');
+        const COOLDOWN_TIME = 60; // 60 seconds cooldown
+        
+        if (lastSentTime) {
+            const timeSinceLastSent = Math.floor((Date.now() - lastSentTime) / 1000);
+            if (timeSinceLastSent < COOLDOWN_TIME) {
+                startCooldown(COOLDOWN_TIME - timeSinceLastSent);
+            }
+        }
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Start loading animation
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            submitBtn.querySelector('.btn-text').textContent = 'Sending...';
+            
+            // Store the time of this request
+            localStorage.setItem('lastVerificationSent', Date.now());
+            
+            // Submit the form after a short delay to show loading state
+            setTimeout(() => {
+                form.submit();
+            }, 1500);
+            
+            // Start cooldown timer
+            startCooldown(COOLDOWN_TIME);
+        });
+        
+        function startCooldown(seconds) {
+            submitBtn.disabled = true;
+            cooldownNotice.style.display = 'block';
+            
+            let remaining = seconds;
+            updateCooldownDisplay(remaining);
+            
+            const interval = setInterval(() => {
+                remaining--;
+                updateCooldownDisplay(remaining);
+                
+                if (remaining <= 0) {
+                    clearInterval(interval);
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('loading');
+                    submitBtn.querySelector('.btn-text').textContent = 'Resend Verification Link';
+                    cooldownNotice.style.display = 'none';
+                    localStorage.removeItem('lastVerificationSent');
+                }
+            }, 1000);
+        }
+        
+        function updateCooldownDisplay(seconds) {
+            cooldownTimer.textContent = seconds;
+        }
+        
+        // Add focus effect to email input
+        const emailInput = document.querySelector('input[name="email"]');
+        if (emailInput) {
+            emailInput.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            emailInput.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        }
+    </script>
+</body>
+</html>
