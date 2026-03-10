@@ -1,4 +1,4 @@
-Markdown<div align="center">
+<div align="center">
 
   <h1>🛡️ Smart Login System Using Django</h1>
 
@@ -62,30 +62,6 @@ Markdown<div align="center">
 - 🎨 **Clean & Responsive UI**  
   Simple, mobile-friendly templates with form validation feedback
 
-## 🖼️ Screenshots
-
-<div align="center">
-  <table>
-    <tr>
-      <td><img src="screenshots/email_signup.png" width="400" alt="Email Signup"/></td>
-      <td><img src="screenshots/email_sent.png" width="400" alt="Email Sent"/></td>
-    </tr>
-    <tr>
-      <td><img src="screenshots/set_password.png" width="400" alt="Set Password"/></td>
-      <td><img src="screenshots/personal_details.png" width="400" alt="Personal Details"/></td>
-    </tr>
-    <tr>
-      <td><img src="screenshots/login.png" width="400" alt="Login"/></td>
-      <td><img src="screenshots/dashboard.png" width="400" alt="Dashboard"/></td>
-    </tr>
-    <tr>
-      <td><img src="screenshots/resend_verification.png" width="400" alt="Resend Verification"/></td>
-      <td><img src="screenshots/403.png" width="400" alt="403 Access Denied"/></td>
-    </tr>
-  </table>
-</div>
-
-> *Tip: Place real screenshots in a `screenshots/` folder and update paths above.*
 
 ## 🚀 Tech Stack
 
@@ -144,6 +120,9 @@ Practicing security middlewares & rate limiting
 Preparing for interviews (auth, forms, signals, security)
 
 Feel free to ⭐ the repo if you find it useful!
+
+
+
 
 
 # Email Verification Project Screenshots
