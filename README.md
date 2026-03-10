@@ -121,7 +121,7 @@ Preparing for interviews (auth, forms, signals, security)
 
 Feel free to ⭐ the repo if you find it useful!
 
-
+```
 
 
 
